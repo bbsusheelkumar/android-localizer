@@ -1,4 +1,4 @@
-# LID Validation Logic (Base Version)
+# Localization & Validation Logic (Base Version)
 # Technologies Used -> Python 3.6.2, OpenPyXL Libraries, PyCharm IDE
 # Developed by B B Susheel Kumar
 # bb.susheelkumar@yahoo.com
