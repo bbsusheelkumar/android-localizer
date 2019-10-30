@@ -13,38 +13,38 @@ import subprocess
 dLogs = 0
 
 
-# ----------------------------------> START of LID EXCEL SHEET INITIALIZATION Logic <--------------------------------
+# ----------------------------------> START of STRING EXCEL SHEET INITIALIZATION Logic <--------------------------------
 
-# Name of LID Excel Sheet
-lidSheetFile = "LIDSheet.xlsx"
+# Name of String Excel Sheet
+stringSheetFile = "StringSheet.xlsx"
 
 # Opening Excel Workbook
-lidBook = load_workbook(filename=lidSheetFile, read_only=False)
-# Go to Strings WorkSheet in the Excel File Opened
-lidSheet = lidBook['Strings']
-# Read only Column "B" Cells (Cell Address)-> LID's, So lidCol contains list of all LID's in the Excel Sheet
-lidCol = lidSheet['B']
+stringBook = load_workbook(filename=stringSheetFile, read_only=False)
+# Go to "Strings" WorkSheet in the Excel File Opened
+stringSheet = stringBook['Strings']
+# Read only Column "B" Cells (Cell Address)-> String's, So stringCol contains list of all String's in the Excel Sheet
+stringCol = stringSheet['B']
 # Read only Row "2" Cells (Cell Address)-> Languages, So langRow contains list of all Languages in the Excel Sheet
-langRow = lidSheet[2]
+langRow = stringSheet[2]
 
-# Extract the data in langRow cell addresses to langList (Stores the list of Languages Supported in LID Excel Sheet)
+# Extract the data in langRow cell addresses to langList (Stores the list of Languages Supported in String Excel Sheet)
 langList = []
 
-# ----------------------------------> END of LID EXCEL SHEET INITIALIZATION Logic <----------------------------------
+# ----------------------------------> END of STRING EXCEL SHEET INITIALIZATION Logic <----------------------------------
 
 
-# Row index of LID Excel Sheet
+# Row index of String Excel Sheet
 rowCounter = 0
-# Counter which gives the number of LID's in XML which are same as in LID Excel Sheet
+# Counter which gives the number of String's in XML which are same as in String Excel Sheet
 matched = 0
 
-# Counter which gives the number of LID's in XML which are found in LID Excel Sheet
+# Counter which gives the number of String's in XML which are found in String Excel Sheet
 foundCounter = 0
 
 
-# -------------------------------------> START of LID EXCEL SHEET SCANNING Logic <------------------------------------
+# -------------------------------------> START of STRING EXCEL SHEET SCANNING Logic <------------------------------------
 # Extracting the data in langRow cell addresses and adding it to langList
-# to make a list of all the available languages in the given LID Excel sheet
+# to make a list of all the available languages in the given String Excel sheet
 for cell in langRow:
     if cell.value is not None:
         langList.append(cell.value.strip())
@@ -63,7 +63,7 @@ strFileLang = []
 #              'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ']
 valueList = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
              27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
-# -------------------------------------> END of LID EXCEL SHEET SCANNING Logic <--------------------------------------
+# -------------------------------------> END of STRINGS EXCEL SHEET SCANNING Logic <--------------------------------------
 
 
 # -----------------------------------------> START of FILE SCANNING Logic <-------------------------------------------
@@ -94,9 +94,9 @@ fileCounter = 0
 
 # ---------------------------------------------> START of MAIN Logic <------------------------------------------------
 for strFile in strFileList:
-    if dLogs: print("File Number: "+fileCounter+" Related Column in LID Sheet: "+valueList[strFileLang[fileCounter]])
+    if dLogs: print("File Number: "+fileCounter+" Related Column in String Sheet: "+valueList[strFileLang[fileCounter]])
     if dLogs: print("File Path: "+strFile+" "+"\n")
-    # sheetColIdx gives the column in LID Excel Sheet to be checked for the respective language
+    # sheetColIdx gives the column in String Excel Sheet to be checked for the respective language
     sheetColIdx = valueList[strFileLang[fileCounter]]
     # Parsing the strings.xml file as an Element Tree (DOM Tree)
     eleTree = ET.parse(strFile)
@@ -105,41 +105,41 @@ for strFile in strFileList:
     # Listing all the <string> elements
     strEle = eleTree.findall('string')
 
-    # Logic to Validate the XML LID with LID in Excel Sheet
-    # Get the LID's in XML and check them in the Excel Sheet for respective Values
-    # Compare values of respective LID's between XML and Excel File
-    # If not similar then replace, else skip to next LID in strings.xml
-    for cell in lidCol:
-        # LID's start after second row in the LID Excel Sheet
+    # Logic to Validate the XML String with String in Excel Sheet
+    # Get the String's in XML and check them in the Excel Sheet for respective Values
+    # Compare values of respective String's between XML and Excel File
+    # If not similar then replace, else skip to next String in strings.xml
+    for cell in stringCol:
+        # String's start after second row in the String Excel Sheet
         if rowCounter >= 2:
-            for lidTag in strEle:
-                # Get the LID Attribute from <string> tag, it gives LID Number
-                lidName = lidTag.get('LID')
-                # NULL Check for Cell Value in Excel and LID Number in XML
-                if cell.value is not None and lidName is not None and lidName.startswith('LID'):
-                    if cell.value.strip() == lidName:
-                        if dLogs: print("FOUND : ", lidName)
-                        # Get the respective LID Value for a LID Number from XML
-                        lidValue = lidTag.text
+            for stringTag in strEle:
+                # Get the String Attribute from <string> tag, it gives String Number
+                stringName = stringTag.get('STRID')
+                # NULL Check for Cell Value in Excel and string Number in XML
+                if cell.value is not None and StringName is not None and stringName.startswith('STRING'):
+                    if cell.value.strip() == stringName:
+                        if dLogs: print("FOUND : ", stringName)
+                        # Get the respective String Value for a String Number from XML
+                        stringValue = stringTag.text
                         # While comparing the values in the XML, we need to remove double quotes at the Start and End
-                        if lidValue.startswith('"') and lidValue.endswith('"'):
-                            lidValue = lidValue[1:-1]
-                        if dLogs: print("XML : ", lidValue)
-                        # ----------> START: Get the respective LID Value for a LID Number from EXCEL <---------------
-                        sheetValue = lidSheet.cell(row=rowCounter + 1, column=sheetColIdx).value
-                        # In case of LID value which has Multiple Lines in the Excel Sheet, split them as lines
-                        lidLines = sheetValue.splitlines()
-                        # Join the lines split as a single line (Multiple Line LID's should have '\n' embedded in it
-                        sheetValue = "\\n".join(lidLines)
-                        # ----------> END: Get the respective LID Value for a LID Number from EXCEL <---------------
+                        if stringValue.startswith('"') and stringValue.endswith('"'):
+                            stringValue = stringValue[1:-1]
+                        if dLogs: print("XML : ", stringValue)
+                        # ----------> START: Get the respective String Value for a String Number from EXCEL <---------------
+                        sheetValue = stringSheet.cell(row=rowCounter + 1, column=sheetColIdx).value
+                        # In case of string value which has Multiple Lines in the Excel Sheet, split them as lines
+                        stringLines = sheetValue.splitlines()
+                        # Join the lines split as a single line (Multiple Line String's should have '\n' embedded in it
+                        sheetValue = "\\n".join(stringLines)
+                        # ----------> END: Get the respective String Value for a String Number from EXCEL <---------------
                         if dLogs: print("EXCEL : ", sheetValue)
-                        if sheetValue == lidValue:
+                        if sheetValue == stringValue:
                             matched += 1
                             if dLogs: print("MATCHED")
                         else:
                             if dLogs: print("NOT MATCHED")
                             # If not matched, replace the value in strings.xml with Excel Sheet Value.
-                            lidTag.text = '"'+sheetValue+'"'
+                            stringTag.text = '"'+sheetValue+'"'
                             if dLogs: print("CHANGED in XML")
                         if dLogs: print("\n")
                         foundCounter += 1
@@ -152,9 +152,6 @@ for strFile in strFileList:
 
 
 # ---------------------------------------------> START of RESULTS <------------------------------------------------
-print("\nLID's FOUND : %d" % foundCounter)
-print("LID's MATCHED : %d\nLID's NOT MATCHED : %d" % (matched, (foundCounter - matched)))
+print("\nString's FOUND : %d" % foundCounter)
+print("String's MATCHED : %d\nString's NOT MATCHED : %d" % (matched, (foundCounter - matched)))
 # ----------------------------------------------> END of RESULTS <-------------------------------------------------
-
-print('Enter "push" command to upload changes to GIT')
-
