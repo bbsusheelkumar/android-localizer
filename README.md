@@ -1,1 +1,1 @@
-# android-localizer
+# android-stringLocalizer
