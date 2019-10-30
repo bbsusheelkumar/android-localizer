@@ -1,0 +1,28 @@
+<resources>
+	
+    <string string="STRING2960" name="str_no_sim">"No SIM Card Detected"</string>  
+    <string string="STRING1541" name="str_poi_received_osd">"Place(s) Downloaded."</string>
+    <string string="STRING0050303" name="str_new_poi_received_osd">"POI(s) Downloaded."</string>
+    <string string="STRING4061" name="vivs_tts_msg_uvo">"Engine power is being reduced.\nPlease pull the vehicle over safely."</string>          
+    <string string="STRING6202" formatted="false" name="person_checked_location">"%s\nhas checked your vehicle location."</string>
+    <string string="STRING0051077" formatted="false" name="cannot_receive_location_sharing">"%s \ncan no longer receive location information."</string>
+    <string string="STRING0051079" formatted="false" name="rejected_location_sharing">"%s\ndeclined location sharing."</string>
+    <string string="STRING0051078" formatted="false" name="more_persons_rejected_location_sharing">"%s and %s people declined location sharing."</string>
+    <string string="STRING6202" formatted="false" name="more_persons_checked_location">"%s and %s people\nhave checked your vehicle location."</string>
+    <string string="STRING0051081" formatted="false" name="location_sharing_terminated">"Receiving location sharing is terminated from\n%s"</string>
+    <string string="STRING0051082" formatted="false" name="more_persons_location_sharing_terminated">"Receiving location sharing is terminated from %s and %s people."</string>
+    <string string="STRING0051213" name="extend_time_fail">"Location share time cannot be extended."</string>
+    <string string="STRING0051215" name="extend_time_success_for_number">"Your location share time has been extended."</string>
+    <string string="STRING0051212" name="extend_time_success_for_multiple_number">"The location share time for your entire outgoing list has been extended."</string>
+    <string string="STRING0051211" name="extend_time_success_for_inbox_number">"%s\nYour location share time has been extended."</string>
+	<string string="STRING390">"STRING390"</string>
+	<string string="STRING560">"STRING560"</string>
+	<string string="STRING841">"STRING841"</string>
+	<string string="STRING857">"STRING857"</string>
+	<string string="STRING888">"STRING888"</string>
+	<string string="STRING1409">"STRING1409"</string>
+	<string string="STRING1416">"STRING1416"</string>
+	<string string="STRING1531">"STRING1531"</string>
+	<string string="STRING1541">"STRING1541"</string>
+
+</resources>
